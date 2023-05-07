@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
   obj_TipoActividad *tipoActividad;
   obj_Profesor *profesor;
   obj_Actividad *actividad;
+  obj_Lugar *lugar;
   
   
   void *list,*itm;
@@ -105,192 +106,262 @@ int main(int argc, char *argv[])
   destroyObj(soc);
  */
  
+    void listarProfesores(){
+		profesor = Profesor_new();     	
+		
+		size = profesor->findAll(profesor,&list,NULL);
+		for(i=0;i<size;++i)
+  		{
+    		itm = ((Object **)list)[i];    
+    		((Object *)itm)->toString(itm);
+  		}
+  		destroyObjList(list,size);
+  		destroyObj(profesor);  	
+	} 
  
-  /*void listarObjeto(void *obj){
-	tipoActividad =  TipoActividad_new();
-  
-  	size = obj->findAll(obj,&list,NULL);
-  	for(i=0;i<size;++i)
-  	{
-    	itm = ((Object **)list)[i];    
-    	((Object *)itm)->toString(itm);
-  	}
-  	destroyObjList(list,size);
-  	destroyObj(tipoActividad);
-  	return;
-  }	PARA SOLUCIONAR!!!!!!!*/
-  /*-------------------------------INGRESAR ACTIVIDAD-------------------------------------*/   
-   void ingresarActividad(){
-  	int codigoTipoActividad;
-  	int legajoProfesor;
-	actividad = Actividad_new();
-  	profesor = Profesor_new();
-  	tipoActividad = TipoActividad_new();
-
-  	/*-----------------------------------------------------------------------------------*/
-  	
-  	//LISTADO DE TIPO DE ACTIVIDAD CON SU CODIGO
-  	//listarObjeto(tipoActividad); // MUESTRA LOS CODIGO PERO NO LOS NOMBRES, SOLUCIONAR!!!!!!!!!!
-  	printf("Ingrese el codigo del tipo de actividad \n");
-    scanf("%d",&codigoTipoActividad);
-    fflush(stdin);
-    if(tipoActividad->findbykey(tipoActividad,codigoTipoActividad) != NOT_FOUND){
-        actividad->setCodTipoAct(actividad,codigoTipoActividad);	
-	}else{
-		printf("Tipo de actividad no encontrada \n");
+    void listarTipoActidades(){
+		tipoActividad = TipoActividad_new();      	
+		
+		size = tipoActividad->findAll(tipoActividad,&list,NULL);
+		for(i=0;i<size;++i)
+  		{
+    		itm = ((Object **)list)[i];    
+    		((Object *)itm)->toString(itm);
+  		}
+  		destroyObjList(list,size);
+  		destroyObj(tipoActividad);  	
 	}
-
-    printf("Ingrese el legajo del profesor \n");
-    scanf("%d",&legajoProfesor);
-   	fflush(stdin);
-	if(profesor->findbykey(profesor,legajoProfesor) != NOT_FOUND){
-	    actividad->setLegajoProfe(actividad,legajoProfesor);
-	}else{
-		printf("Profesor no encontrado \n");		
-	}
-
-  	if(!actividad->saveObj(actividad))
-  	{
-  		printf("Ocurrio un error al agregar Localidad:\n%s\n",getLastError());
-  	}
-  	destroyObj(actividad);
-  }
-  /*-----------------------------INGRESAR LOCALIDAD----------------------------------*/
-  void ingresarLocalidad(){
-	localidad =  Localidad_new();
-	int codigoPostal;
-	char nombre[60];
 	
-	printf("Ingrese el codigo postal de la localidad \n");
-    scanf("%d",&codigoPostal);
-    fflush(stdin);
+  /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/
+  	void actualizarProfesor(){
+		profesor = Profesor_new();
+		int legajo;  		
+  		
+  		listarProfesores();
+		printf("Ingrese el legajo del profesor que quiere modificar:");
+		fflush(stdin);
+		scanf("%d",&legajo);
+		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
+			menuModificacionesProfesor();
+ 		}
+		 	
+		destroyObj(tipoActividad);
+		return;
+  	} 	
 
-	if(localidad->findbykey(localidad,codigoPostal) != NOT_FOUND){	
-	    localidad->setId(localidad,codigoPostal);
-  		printf("Ingrese el nombre de la localidad \n");
+  /*-------------------------------ACTUALIZAR TIPO ACTIVIDAD-------------------------------------*/
+  	void actualizarTipoActividad(){
+		tipoActividad = TipoActividad_new();  		
+		char nombre[20];
+  		int codigo;
+  		
+  		listarTipoActidades();
+		printf("Ingrese el codigo del tipo de actividad que quiere modificar:");
+		fflush(stdin);
+		scanf("%d",&codigo);
+		if(tipoActividad->findbykey(tipoActividad,codigo) != NOT_FOUND){
+			printf("Ingrese la nueva descripcion del tipo de actividad:");
+			fflush(stdin);		
+			fgets(nombre, sizeof(nombre), stdin);	
+	  		tipoActividad->setNombre(tipoActividad,nombre);
+	  		if(!tipoActividad->saveObj(tipoActividad))
+	  		{
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}
+		 	
+		destroyObj(tipoActividad);
+		return;
+  	} 
+  /*-------------------------------INGRESAR ACTIVIDAD-------------------------------------*/   
+    void ingresarLugar(){
+  		int codigoLugar;
+		char nombre[50];
+		lugar = Lugar_new();
+  		
+		printf("Ingrese el codigo del tipo de actividad:");
+   		scanf("%d",&codigoTipoActividad);
+		fflush(stdin);
+
+    	printf("Ingrese el legajo del profesor:");
+    	scanf("%d",&legajoProfesor);
+		fflush(stdin);
+
+  		if(!actividad->saveObj(actividad))
+  		{
+  			printf("Ocurrio un error al agregar la actividad:\n%s\n",getLastError());
+  		}
+  		destroyObj(actividad);
+  	}	   
+  /*-------------------------------INGRESAR ACTIVIDAD-------------------------------------*/   
+    void ingresarActividad(){
+  		int codigoTipoActividad;
+  		int legajoProfesor;
+		actividad = Actividad_new();
+  		profesor = Profesor_new();
+  		tipoActividad = TipoActividad_new();
+  		
+		printf("Ingrese el codigo del tipo de actividad:");
+   		scanf("%d",&codigoTipoActividad);
+		fflush(stdin);
+
+    	printf("Ingrese el legajo del profesor:");
+    	scanf("%d",&legajoProfesor);
+		fflush(stdin);
+
+  		if(!actividad->saveObj(actividad))
+  		{
+  			printf("Ocurrio un error al agregar la actividad:\n%s\n",getLastError());
+  		}
+  		destroyObj(actividad);
+  	}
+  /*-----------------------------INGRESAR LOCALIDAD----------------------------------*/
+  	void ingresarLocalidad(){
+		localidad =  Localidad_new();
+		int codigoPostal;
+		char nombre[60];
+	
+		printf("Ingrese el codigo postal de la localidad:");
+    	scanf("%d",&codigoPostal);
+    	fflush(stdin);	
+		localidad->setId(localidad,codigoPostal);
+  	
+		printf("Ingrese el nombre de la localidad:");
     	fgets(nombre, sizeof(nombre), stdin);
    		localidad->setNombre(localidad,nombre);
     	fflush(stdin);
 		  
-		if(!localidad->saveObj(localidad))
-  		{
+		/*PARA HACER: HACER EL INGRESO DE FECHAS*/  
+		  
+		if(!localidad->saveObj(localidad)){
   			printf("Ocurrio un error al agregar Localidad:\n%s\n",getLastError());
   		}
-    }else{
-    	printf("La localidad ya se encuentra cargada \n");
-	}
-  	destroyObj(localidad);
-  }
-  /*-----------------------------INGRESAR PROFESOR-------------------------------------*/
-  void ingresarProfesor(){
-  	char nombre[20];
-  	char apellido[20];
-  	char domicilio[40];
-  	char telefono[20];
-  	int dni;
 
-	profesor = Profesor_new();
+  		destroyObj(localidad);
+  	}
+  /*-----------------------------INGRESAR PROFESOR-------------------------------------*/
+  	void ingresarProfesor(){
+  		char nombre[20];
+  		char apellido[20];
+  		char domicilio[40];
+  		char telefono[20];
+  		int dni;
+		profesor = Profesor_new();
 	
-	printf("Ingrese el dni del profesor \n");
-    scanf("%d",&dni);
-    fflush(stdin);
-    if(profesor->findbykey(profesor,dni) != NOT_FOUND){ //PREGUNTAR PARA BUSCAR POR ATRIBUTO Y NO POR FUNCION
+		printf("Ingrese el dni del profesor:");
+    	scanf("%d",&dni);
+    	fflush(stdin);
     	profesor->setDni(profesor,dni);
- 		printf("Ingrese el nombre del profesor \n");
+ 		printf("Ingrese el nombre del profesor:");
     	fgets(nombre, sizeof(nombre), stdin);
     	profesor->setNombres(profesor,nombre);
     
-    	printf("Ingrese el apellido del profesor \n");
+    	printf("Ingrese el apellido del profesor:");
     	fgets(apellido, sizeof(apellido), stdin);
     	profesor->setApellido(profesor,apellido);
     
-    	printf("Ingrese el domicilio del profesor \n");
+    	printf("Ingrese el domicilio del profesor:");
     	fgets(domicilio, sizeof(domicilio), stdin);
     	profesor->setDomicilio(profesor,domicilio);
     
-    	printf("Ingrese el telefono del profesor \n");
+    	printf("Ingrese el telefono del profesor:");
     	fgets(telefono, sizeof(telefono), stdin);
     	profesor->setTelefono(profesor,telefono);
     	profesor->saveObj(profesor);   
 		
-		if ( profesor->saveObj(profesor) == true ){
- 			printf("Profesor ingresado correctamente!\n");
-		}	
-	}else{
-		printf("El profesor ya se encuentra cargado \n");
-	}
-	destroyObj(profesor);
-	return;
-  }
+		if(!profesor->saveObj(profesor)){
+  			printf("Ocurrio un error al agregar el profesor:\n%s\n",getLastError());
+  		}
+	
+		destroyObj(profesor);
+		return;
+  	}
 
   /*------------------------------INGRESAR TIPO ACTIVIDAD----------------------------------------*/  
-  void ingresarTipoActividad(){
-  	char nombre[20];
-
-	tipoActividad = TipoActividad_new();
-	printf("Ingrese el nombre de la actividad \n");
-	fflush(stdin);
-    fgets(nombre, sizeof(nombre), stdin);
-    if(sizeof(nombre) != 0){
+  	void ingresarTipoActividad(){
+  		char nombre[20];
+		tipoActividad = TipoActividad_new();
+		
+		printf("Ingrese el nombre de la actividad \n");
+		fflush(stdin);
+    	fgets(nombre, sizeof(nombre), stdin);
     	tipoActividad->setNombre(tipoActividad,nombre);
 		tipoActividad->saveObj(tipoActividad);
-		if ( tipoActividad->saveObj(tipoActividad) == true )
-		{
- 			printf("Tipo de actividad ingresada correctamente!\n");
-		}	
-	}else{
-		printf("NO INGRESO NINGUN NOMBRE, REINTENTE \n");
-	}
+	
+		if(!tipoActividad->saveObj(tipoActividad)){
+  			printf("Ocurrio un error al agregar el tipo de actividad:\n%s\n",getLastError());
+  		}	
 
-	destroyObj(tipoActividad);
-	return;
-  }
+
+		destroyObj(tipoActividad);
+		return;
+  	}
+  /*-------------------------------MENU ACTUALIZAR---------------------------------------*/     
+  	void menuActualizar(){
+  		int opcion;
+  		printf("[ Menu actualizar ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n");
+		do{
+			scanf("%d",&opcion);
+			switch(opcion){
+				case 1:
+					actualizarTipoActividad();
+					break;
+				case 2:
+					actualizarProfesor();
+					break;					
+				default:
+					printf("Ingrese una opcion valida ingresos \n");					
+			}
+		}while (1);
+		return;
+  	}  	
   /*-------------------------------MENU INGRESOS---------------------------------------*/     
-  void menuIngresos(){
-  	int opcion;
-  	printf("[ Menu ingresos ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n");
-	do{
-		scanf("%d",&opcion);
-		switch(opcion){
-			case 1:
-				ingresarTipoActividad();
-				break;
-			case 2:
-				ingresarProfesor();
-				break;
-			case 3:
-				ingresarLocalidad();
-				break;
-			case 4:
-				ingresarActividad();
-				break;
-			default:
-				printf("Ingrese una opcion valida ingresos \n");					
-		}
-	}while (1);
-	return;
-  }	
+  	void menuIngresos(){
+  		int opcion;
+  		printf("[ Menu ingresos ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n");
+		do{
+			scanf("%d",&opcion);
+			switch(opcion){
+				case 1:
+					ingresarTipoActividad();
+					break;
+				case 2:
+					ingresarProfesor();
+					break;
+				case 3:
+					ingresarLocalidad();
+					break;
+				case 4:
+					ingresarActividad();
+					break;
+				default:
+					printf("Ingrese una opcion valida ingresos \n");					
+			}
+		}while (1);
+		return;
+  	}	
   /*-------------------------------MENU GENERAL------------------------------------*/    
-  void menuGeneral(){
-  	int opcion;
-  	printf("[ Menu general ]\n[ 1 - Ingresos]\n[ 2 - Actualizaciones]\n[ 3 - Listados ]\n[ 4 - Salir ]\n");
-	do{
-		scanf("%d",&opcion);
-		switch(opcion){
-			case 1:
-				menuIngresos();
-				break;
-			case 2:
-				return;
-			/*case 3:
-				menuListados();*/
-			default:
-				printf("Ingrese una opcion valida general \n");					
-				break;
-		}		
-	}while (1);
-  }	
+  	void menuGeneral(){
+  		int opcion;
+  		printf("[ Menu general ]\n[ 1 - Ingresos]\n[ 2 - Actualizaciones]\n[ 3 - Listados ]\n[ 4 - Salir ]\n");
+		do{
+			scanf("%d",&opcion);
+			switch(opcion){
+				case 1:
+					menuIngresos();
+					break;
+				case 2:
+					menuActualizar();
+					break;
+				/*case 3:
+					menuListados();*/
+				default:
+					printf("Ingrese una opcion valida general \n");					
+					break;
+			}		
+		}while (1);
+ 	 }	
   
-  menuGeneral();
+  	menuGeneral();
   return 0;
 }

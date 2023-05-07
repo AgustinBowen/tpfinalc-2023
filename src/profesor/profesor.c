@@ -7,7 +7,8 @@ THIS(obj_Profesor)// crea definicion de funcion this para este modulo. .. Macro 
 static void toString_ProfesorImpl(void *self)
 {
      obj_Profesor *obj=this(self);          
-     printf("DNI: %d  - ApyNom:%s, %s \n",
+     printf("Legajo: %d DNI: %d  - ApyNom:%s, %s \n",
+     obj->getLegajo(obj),
 	 obj->getDni(obj),
 	 obj->getApellido(obj),
 	 obj->getNombres(obj)

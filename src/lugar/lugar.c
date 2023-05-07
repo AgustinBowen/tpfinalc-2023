@@ -1,35 +1,35 @@
 #include "../../includes/includelib.h"
 
-#include "tipo_actividad.h"
+#include "lugares.h"
 
-THIS(obj_TipoActividad)// crea definicion de funcion this para este modulo. .. Macro en config.h
+THIS(obj_Lugar)// crea definicion de funcion this para este modulo. .. Macro en config.h
 //----------------------------------------------------
-static void toString_TipoActividadImpl(void *self)
+static void toString_LugarImpl(void *self)
 {
-     obj_TipoActividad *obj=this(self);
+     obj_Lugar *obj=this(self);
      printf("%d %s\n",obj->getCodigo(obj),obj->getNombre(obj));
 }
 //----------------------------------------------------
 //implementacion de getters
 //----------------------------------------------------
-static int getCodigoTipoActividad_Impl(void *self)
+static int getCodigoLugar_Impl(void *self)
 {
   return *( (int *) getValue(self,POS_ID));
 }
 //----------------------------------------------------
-static char *getNombreTipoActividad_Impl(void *self)
+static char *getNombreLugar_Impl(void *self)
 {
   return  (char *) getValue(self,POS_NOMBRE_TIPOACT);
 }
 //----------------------------------------------------
 //implementacion setters
 //----------------------------------------------------
-static void setCodigoTipoActividad_Impl(void *self,int val)
+static void setCodigoLugar_Impl(void *self,int val)
 { 
 	setValue(self,POS_ID,&val);
 }
 //----------------------------------------------------
-static void setNombreTipoActividad_Impl(void *self,char *nombre)
+static void setNombreLugar_Impl(void *self,char *nombre)
 { 
 	setValue(self,POS_NOMBRE_TIPOACT,nombre);
 }
@@ -40,14 +40,14 @@ static void setNombreTipoActividad_Impl(void *self,char *nombre)
 //----------------------------------------------------
 //implementacion constructor
 //----------------------------------------------------
-static void *init_TipoActividad(void *self)
+static void *init_Lugar(void *self)
 {
-  obj_TipoActividad *obj  = this(self);
-  obj->ds  				  = &table_TipoActividad;
-  obj->constructor 		  = TipoActividad_new;
-  obj->sizeObj 			  = sizeof(obj_TipoActividad*);
+  obj_Lugar *obj  = this(self);
+  obj->ds  				  = &table_Lugar;
+  obj->constructor 		  = Lugar_new;
+  obj->sizeObj 			  = sizeof(obj_Lugar*);
   //incializacion de la interfaz de la entidad  
-  obj->toString    		  = toString_TipoActividadImpl;
+  obj->toString    		  = toString_LugarImpl;
   // Inicializar handlers de getters y setters
   /// getters
   obj->getCodigo  		  = getCodigoTipoActividad_Impl;
@@ -59,8 +59,8 @@ static void *init_TipoActividad(void *self)
 }
 //----------------------------------------------------
 //constructor de TipoActividad
-obj_TipoActividad *TipoActividad_new()
+obj_Lugar *Lugar_new()
 {
-  return (obj_TipoActividad *)init_obj(sizeof(obj_TipoActividad), init_TipoActividad);
+  return (obj_Lugar *)init_obj(sizeof(obj_Lugar), init_Lugar);
 }
 //----------------------------------------------------
