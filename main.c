@@ -106,6 +106,19 @@ int main(int argc, char *argv[])
   destroyObj(soc);
  */
  
+    void listarLocalidades(){
+		localidad = Localidad_new();     	
+		
+		size = localidad->findAll(localidad,&list,NULL);
+		for(i=0;i<size;++i)
+  		{
+    		itm = ((Object **)list)[i];    
+    		((Object *)itm)->toString(itm);
+  		}
+  		destroyObjList(list,size);
+  		destroyObj(localidad);  	
+	} 
+ 
     void listarProfesores(){
 		profesor = Profesor_new();     	
 		
@@ -131,7 +144,22 @@ int main(int argc, char *argv[])
   		destroyObjList(list,size);
   		destroyObj(tipoActividad);  	
 	}
-	
+  /*-------------------------------ACTUALIZAR LOCALIDAD-------------------------------------*/	
+  	void actualizarLocalidad(){
+		localidad = Localidad_new();
+		int codigoPostal;  		
+  		
+  		listarLocalidades();
+		printf("\nIngrese el codigo postal de la localidad que quiere modificar:");
+		fflush(stdin);
+		scanf("%d",&codigoPostal);
+		if(localidad->findbykey(localidad,codigoPostal) != NOT_FOUND){
+			printf("ENTRO AL IF");
+ 		}
+		 	
+		destroyObj(tipoActividad);
+		return;
+  	}	  
   /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/
   	void actualizarProfesor(){
 		profesor = Profesor_new();
@@ -303,7 +331,10 @@ int main(int argc, char *argv[])
 					break;
 				case 2:
 					actualizarProfesor();
-					break;					
+					break;
+				case 3:
+					actualizarLocalidad();
+					break;										
 				default:
 					printf("Ingrese una opcion valida ingresos \n");					
 			}
