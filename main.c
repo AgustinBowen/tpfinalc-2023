@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
   obj_TipoActividad *tipoActividad;
   obj_Profesor *profesor;
   obj_Actividad *actividad;
-  obj_Lugar *lugar;
+  //obj_Lugar *lugar;
   
   
   void *list,*itm;
@@ -138,16 +138,16 @@ int main(int argc, char *argv[])
 		int legajo;  		
   		
   		listarProfesores();
-		printf("Ingrese el legajo del profesor que quiere modificar:");
+		printf("\nIngrese el legajo del profesor que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&legajo);
 		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
-			menuModificacionesProfesor();
+			printf("ENTRO AL IF");
  		}
 		 	
 		destroyObj(tipoActividad);
 		return;
-  	} 	
+  	}	
 
   /*-------------------------------ACTUALIZAR TIPO ACTIVIDAD-------------------------------------*/
   	void actualizarTipoActividad(){
@@ -173,26 +173,21 @@ int main(int argc, char *argv[])
 		destroyObj(tipoActividad);
 		return;
   	} 
-  /*-------------------------------INGRESAR ACTIVIDAD-------------------------------------*/   
-    void ingresarLugar(){
-  		int codigoLugar;
+  /*-------------------------------INGRESAR LUGAR------------------------------------- 
+    void ingresarLugar(){		
 		char nombre[50];
 		lugar = Lugar_new();
-  		
-		printf("Ingrese el codigo del tipo de actividad:");
-   		scanf("%d",&codigoTipoActividad);
+
+    	printf("Ingrese el nombre del lugar:");
+    	scanf("%d",&nombre);
 		fflush(stdin);
 
-    	printf("Ingrese el legajo del profesor:");
-    	scanf("%d",&legajoProfesor);
-		fflush(stdin);
-
-  		if(!actividad->saveObj(actividad))
+  		if(!lugar->saveObj(lugar))
   		{
-  			printf("Ocurrio un error al agregar la actividad:\n%s\n",getLastError());
+  			printf("Ocurrio un error al agregar el lugar:\n%s\n",getLastError());
   		}
-  		destroyObj(actividad);
-  	}	   
+  		destroyObj(lugar);
+  	}	 */  
   /*-------------------------------INGRESAR ACTIVIDAD-------------------------------------*/   
     void ingresarActividad(){
   		int codigoTipoActividad;

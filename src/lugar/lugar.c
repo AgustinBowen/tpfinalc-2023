@@ -1,6 +1,6 @@
 #include "../../includes/includelib.h"
 
-#include "lugares.h"
+#include "lugar.h"
 
 THIS(obj_Lugar)// crea definicion de funcion this para este modulo. .. Macro en config.h
 //----------------------------------------------------
@@ -50,11 +50,11 @@ static void *init_Lugar(void *self)
   obj->toString    		  = toString_LugarImpl;
   // Inicializar handlers de getters y setters
   /// getters
-  obj->getCodigo  		  = getCodigoTipoActividad_Impl;
-  obj->getNombre		  = getNombreTipoActividad_Impl;  
+  obj->getCodigo  		  = getCodigoLugar_Impl;
+  obj->getNombre		  = getNombreLugar_Impl;  
   /// setters  
-  obj->setCodigo     	  = setCodigoTipoActividad_Impl;
-  obj->setNombre   		  = setNombreTipoActividad_Impl;  
+  obj->setCodigo     	  = setCodigoLugar_Impl;
+  obj->setNombre   		  = setNombreLugar_Impl;  
   return obj;
 }
 //----------------------------------------------------
@@ -64,3 +64,4 @@ obj_Lugar *Lugar_new()
   return (obj_Lugar *)init_obj(sizeof(obj_Lugar), init_Lugar);
 }
 //----------------------------------------------------
+

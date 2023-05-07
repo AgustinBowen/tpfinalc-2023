@@ -20,7 +20,7 @@
 	static Column cols_Lugar[CNT_COL_TIPOACT]=
 	{ 
 	//definicion del mapeo, por cada columna de la tabla con los atributos del pseudobjeto.
-	// nombre de la columna, tipo, tamaÃ±o, si es clave, si es autonumerado.
+	// nombre de la columna, tipo, tamaño, si es clave, si es autonumerado.
 	{"codigo",t_int,sizeof(int),true,true},		
 	{"nombre",t_varchar,(sizeof(char)*MAX90)+1,false,false}	
 	};
@@ -28,3 +28,4 @@
 	static Table table_Lugar={"lugar",CNT_COL_TIPOACT,0, cols_Lugar,NULL};
 	typedef obj_Lugar *(*getLugarObjPtr)(void *self);
 #endif
+

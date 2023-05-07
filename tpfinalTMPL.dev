@@ -290,16 +290,6 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit31]
-FileName=src\lugares\lugar.h
-CompileCpp=0
-Folder=src/lugar
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit32]
 FileName=lib\orm\query.h
 CompileCpp=0
@@ -391,7 +381,17 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit30]
-FileName=src\lugares\lugar.c
+FileName=src\lugar\lugar.c
+CompileCpp=0
+Folder=src/lugar
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit31]
+FileName=src\lugar\lugar.h
 CompileCpp=0
 Folder=src/lugar
 Compile=1
