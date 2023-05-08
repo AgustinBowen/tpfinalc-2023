@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
   obj_TipoActividad *tipoActividad = TipoActividad_new();
   obj_Profesor *profesor = Profesor_new();
   obj_Actividad *actividad = Actividad_new();
-  //obj_Lugar *lugar;
+  obj_Lugar *lugar;
   
   
   void *list,*itm;
