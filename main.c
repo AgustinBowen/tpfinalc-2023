@@ -317,8 +317,8 @@ int main(int argc, char *argv[])
   /*-------------------------------MENU ACTUALIZAR---------------------------------------*/     
   	void menuActualizar(){
   		int opcion;
-  		printf("[ Menu actualizar ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n");
 		do{
+  			printf("[ Menu actualizar ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n[ 11 - Volver]\n");			
 			scanf("%d",&opcion);
 			switch(opcion){
 				case 1:
@@ -329,19 +329,20 @@ int main(int argc, char *argv[])
 					break;
 				case 3:
 					actualizarLocalidad();
-					break;										
+					break;
+				case 11:
+					return;										
 				default:
 					printf("Ingrese una opcion valida ingresos \n");					
 			}
 		}while (1);
-		return;
   	}  	
   /*-------------------------------MENU INGRESOS---------------------------------------*/     
   	void menuIngresos(){
   		int opcion;
-  		printf("[ Menu ingresos ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n");
-		scanf("%d",&opcion);
-   		while(opcion != 5)	
+  		do{
+   			printf("[ Menu ingresos ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n[ 5 - Volver]\n");
+			scanf("%d",&opcion);	
 			switch(opcion){
 				case 1:
 					ingresarTipoActividad();
@@ -355,32 +356,35 @@ int main(int argc, char *argv[])
 				case 4:
 					ingresarActividad();
 					break;
+				case 5:
+					return;					
 				default:
 					printf("Ingrese una opcion valida ingresos \n");					
-        	}
-    	} while(opcion != 5);
-    	return;
+    		}  			
+		}while(1);
   	}	
   /*-------------------------------MENU GENERAL------------------------------------*/    
   	void menuGeneral(){
   		int opcion;
-  		printf("[ Menu general ]\n[ 1 - Ingresos]\n[ 2 - Actualizaciones]\n[ 3 - Listados ]\n[ 4 - Salir ]\n");
-		scanf("%d",&opcion);
-		switch(opcion){
-			case 1:
-				menuIngresos();
-				break;
-			case 2:
-				menuActualizar();
-				break;
-			/*case 3:
-				menuListados();*/
-			case 4:
-				return;
-			default:
-				printf("Ingrese una opcion valida general \n");					
-				break;
-		}		
+  		do{
+    		printf("[ Menu general ]\n[ 1 - Ingresos]\n[ 2 - Actualizaciones]\n[ 3 - Listados ]\n[ 4 - Salir ]\n");
+			scanf("%d",&opcion);
+			switch(opcion){
+				case 1:
+					menuIngresos();
+					break;
+				case 2:
+					menuActualizar();
+					break;
+				/*case 3:
+					menuListados();*/
+				case 4:
+					return;
+				default:
+					printf("Ingrese una opcion valida general \n");					
+					break;
+			}			
+		}while(1);		
  	 }	
   
   	menuGeneral();
