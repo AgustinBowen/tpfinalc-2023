@@ -12,11 +12,11 @@
 int main(int argc, char *argv[])
 {
   
-  obj_Localidad *localidad;
-  obj_Socio *socio;
-  obj_TipoActividad *tipoActividad;
-  obj_Profesor *profesor;
-  obj_Actividad *actividad;
+  obj_Localidad *localidad = Localidad_new();
+  obj_Socio *socio = Socio_new();
+  obj_TipoActividad *tipoActividad = TipoActividad_new();
+  obj_Profesor *profesor = Profesor_new();
+  obj_Actividad *actividad = Actividad_new();
   //obj_Lugar *lugar;
   
   
@@ -115,8 +115,7 @@ int main(int argc, char *argv[])
     		itm = ((Object **)list)[i];    
     		((Object *)itm)->toString(itm);
   		}
-  		destroyObjList(list,size);
-  		destroyObj(localidad);  	
+  		destroyObjList(list,size);	
 	} 
  
     void listarProfesores(){
@@ -128,21 +127,17 @@ int main(int argc, char *argv[])
     		itm = ((Object **)list)[i];    
     		((Object *)itm)->toString(itm);
   		}
-  		destroyObjList(list,size);
-  		destroyObj(profesor);  	
+  		destroyObjList(list,size);	
 	} 
  
-    void listarTipoActidades(){
-		tipoActividad = TipoActividad_new();      	
-		
+    void listarTipoActividades(){    	
 		size = tipoActividad->findAll(tipoActividad,&list,NULL);
 		for(i=0;i<size;++i)
   		{
     		itm = ((Object **)list)[i];    
     		((Object *)itm)->toString(itm);
   		}
-  		destroyObjList(list,size);
-  		destroyObj(tipoActividad);  	
+  		destroyObjList(list,size);	
 	}
   /*-------------------------------ACTUALIZAR LOCALIDAD-------------------------------------*/	
   	void actualizarLocalidad(){
@@ -150,30 +145,58 @@ int main(int argc, char *argv[])
 		int codigoPostal;  		
   		
   		listarLocalidades();
-		printf("\nIngrese el codigo postal de la localidad que quiere modificar:");
+		printf("Ingrese el codigo postal de la localidad que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&codigoPostal);
 		if(localidad->findbykey(localidad,codigoPostal) != NOT_FOUND){
 			printf("ENTRO AL IF");
  		}
-		 	
-		destroyObj(tipoActividad);
 		return;
-  	}	  
-  /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/
+  	} 
+	void modificarDniProfesor(int codigo){
+		int legajo = codigo,dni;
+
+		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
+			printf("Ingrese el nuevo dni:");
+			fflush(stdin);		
+			scanf("%d",&dni);	
+	  		profesor->setDni(profesor,dni);
+	  		if(!profesor->saveObj(profesor)){
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}			
+	}   
+   /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/
   	void actualizarProfesor(){
-		profesor = Profesor_new();
-		int legajo;  		
-  		
+		int legajo,opcion;  		
   		listarProfesores();
-		printf("\nIngrese el legajo del profesor que quiere modificar:");
+  		
+		printf("Ingrese el legajo del profesor que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&legajo);
 		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
-			printf("ENTRO AL IF");
+  			printf("[ Menu profesor ]\n[ 1 - DNI]\n[ 2 - Nombres]\n[ 3 - Apellido]\n[ 4 - Domicilio]\n[ 5 - Telefono]\n");
+  			scanf("%d",&opcion);
+			switch(opcion){
+				case 1:
+					modificarDniProfesor(legajo);
+					break;
+				/*case 2:
+					modificarNombresProfesor(legajo);
+					break;
+				case 3:
+					modificarApellidoProfesor(legajo);
+					break;
+				case 4:
+					modificarDomicilioProfesor(legajo);
+					break;
+				case 5:
+					modificarTelefonoProfesor(legajo);
+					break;*/
+				default:
+					printf("Ingrese una opcion valida");																
+			}  
  		}
-		 	
-		destroyObj(tipoActividad);
 		return;
   	}	
 
@@ -183,7 +206,7 @@ int main(int argc, char *argv[])
 		char nombre[20];
   		int codigo;
   		
-  		listarTipoActidades();
+  		listarTipoActividades(&tipoActividad);
 		printf("Ingrese el codigo del tipo de actividad que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&codigo);
@@ -192,30 +215,12 @@ int main(int argc, char *argv[])
 			fflush(stdin);		
 			fgets(nombre, sizeof(nombre), stdin);	
 	  		tipoActividad->setNombre(tipoActividad,nombre);
-	  		if(!tipoActividad->saveObj(tipoActividad))
-	  		{
+	  		if(!tipoActividad->saveObj(tipoActividad)){
 	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
 	  		}
  		}
-		 	
-		destroyObj(tipoActividad);
 		return;
-  	} 
-  /*-------------------------------INGRESAR LUGAR------------------------------------- 
-    void ingresarLugar(){		
-		char nombre[50];
-		lugar = Lugar_new();
-
-    	printf("Ingrese el nombre del lugar:");
-    	scanf("%d",&nombre);
-		fflush(stdin);
-
-  		if(!lugar->saveObj(lugar))
-  		{
-  			printf("Ocurrio un error al agregar el lugar:\n%s\n",getLastError());
-  		}
-  		destroyObj(lugar);
-  	}	 */  
+  	}  
   /*-------------------------------INGRESAR ACTIVIDAD-------------------------------------*/   
     void ingresarActividad(){
   		int codigoTipoActividad;
@@ -236,11 +241,9 @@ int main(int argc, char *argv[])
   		{
   			printf("Ocurrio un error al agregar la actividad:\n%s\n",getLastError());
   		}
-  		destroyObj(actividad);
   	}
   /*-----------------------------INGRESAR LOCALIDAD----------------------------------*/
   	void ingresarLocalidad(){
-		localidad =  Localidad_new();
 		int codigoPostal;
 		char nombre[60];
 	
@@ -259,8 +262,6 @@ int main(int argc, char *argv[])
 		if(!localidad->saveObj(localidad)){
   			printf("Ocurrio un error al agregar Localidad:\n%s\n",getLastError());
   		}
-
-  		destroyObj(localidad);
   	}
   /*-----------------------------INGRESAR PROFESOR-------------------------------------*/
   	void ingresarProfesor(){
@@ -269,7 +270,6 @@ int main(int argc, char *argv[])
   		char domicilio[40];
   		char telefono[20];
   		int dni;
-		profesor = Profesor_new();
 	
 		printf("Ingrese el dni del profesor:");
     	scanf("%d",&dni);
@@ -295,8 +295,6 @@ int main(int argc, char *argv[])
 		if(!profesor->saveObj(profesor)){
   			printf("Ocurrio un error al agregar el profesor:\n%s\n",getLastError());
   		}
-	
-		destroyObj(profesor);
 		return;
   	}
 
@@ -314,9 +312,6 @@ int main(int argc, char *argv[])
 		if(!tipoActividad->saveObj(tipoActividad)){
   			printf("Ocurrio un error al agregar el tipo de actividad:\n%s\n",getLastError());
   		}	
-
-
-		destroyObj(tipoActividad);
 		return;
   	}
   /*-------------------------------MENU ACTUALIZAR---------------------------------------*/     
@@ -345,8 +340,8 @@ int main(int argc, char *argv[])
   	void menuIngresos(){
   		int opcion;
   		printf("[ Menu ingresos ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n");
-		do{
-			scanf("%d",&opcion);
+		scanf("%d",&opcion);
+   		while(opcion != 5)	
 			switch(opcion){
 				case 1:
 					ingresarTipoActividad();
@@ -362,32 +357,37 @@ int main(int argc, char *argv[])
 					break;
 				default:
 					printf("Ingrese una opcion valida ingresos \n");					
-			}
-		}while (1);
-		return;
+        	}
+    	} while(opcion != 5);
+    	return;
   	}	
   /*-------------------------------MENU GENERAL------------------------------------*/    
   	void menuGeneral(){
   		int opcion;
   		printf("[ Menu general ]\n[ 1 - Ingresos]\n[ 2 - Actualizaciones]\n[ 3 - Listados ]\n[ 4 - Salir ]\n");
-		do{
-			scanf("%d",&opcion);
-			switch(opcion){
-				case 1:
-					menuIngresos();
-					break;
-				case 2:
-					menuActualizar();
-					break;
-				/*case 3:
-					menuListados();*/
-				default:
-					printf("Ingrese una opcion valida general \n");					
-					break;
-			}		
-		}while (1);
+		scanf("%d",&opcion);
+		switch(opcion){
+			case 1:
+				menuIngresos();
+				break;
+			case 2:
+				menuActualizar();
+				break;
+			/*case 3:
+				menuListados();*/
+			case 4:
+				return;
+			default:
+				printf("Ingrese una opcion valida general \n");					
+				break;
+		}		
  	 }	
   
   	menuGeneral();
+  	destroyObj(localidad);
+  	destroyObj(socio);
+  	destroyObj(tipoActividad);
+  	destroyObj(profesor);
+  	destroyObj(actividad);
   return 0;
 }
