@@ -106,10 +106,8 @@ int main(int argc, char *argv[])
   destroyObj(soc);
  */
  
-    void listarLocalidades(){
-		localidad = Localidad_new();     	
-		
-		size = localidad->findAll(localidad,&list,NULL);
+    void listar(void *obj){
+		size = ((Object *)obj)->findAll(obj,&list,NULL);
 		for(i=0;i<size;++i)
   		{
     		itm = ((Object **)list)[i];    
@@ -118,33 +116,12 @@ int main(int argc, char *argv[])
   		destroyObjList(list,size);	
 	} 
  
-    void listarProfesores(){
-		profesor = Profesor_new();     	
-		
-		size = profesor->findAll(profesor,&list,NULL);
-		for(i=0;i<size;++i)
-  		{
-    		itm = ((Object **)list)[i];    
-    		((Object *)itm)->toString(itm);
-  		}
-  		destroyObjList(list,size);	
-	} 
- 
-    void listarTipoActividades(){    	
-		size = tipoActividad->findAll(tipoActividad,&list,NULL);
-		for(i=0;i<size;++i)
-  		{
-    		itm = ((Object **)list)[i];    
-    		((Object *)itm)->toString(itm);
-  		}
-  		destroyObjList(list,size);	
-	}
   /*-------------------------------ACTUALIZAR LOCALIDAD-------------------------------------*/	
   	void actualizarLocalidad(){
 		localidad = Localidad_new();
 		int codigoPostal;  		
   		
-  		listarLocalidades();
+  		listar(localidad);
 		printf("Ingrese el codigo postal de la localidad que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&codigoPostal);
@@ -169,7 +146,8 @@ int main(int argc, char *argv[])
    /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/
   	void actualizarProfesor(){
 		int legajo,opcion;  		
-  		listarProfesores();
+  		system("cls");
+		  listar(profesor);
   		
 		printf("Ingrese el legajo del profesor que quiere modificar:");
 		fflush(stdin);
@@ -318,6 +296,7 @@ int main(int argc, char *argv[])
   	void menuActualizar(){
   		int opcion;
 		do{
+			system("cls");
   			printf("[ Menu actualizar ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n[ 11 - Volver]\n");			
 			scanf("%d",&opcion);
 			switch(opcion){
@@ -331,6 +310,7 @@ int main(int argc, char *argv[])
 					actualizarLocalidad();
 					break;
 				case 11:
+					system("cls");
 					return;										
 				default:
 					printf("Ingrese una opcion valida ingresos \n");					
@@ -341,6 +321,7 @@ int main(int argc, char *argv[])
   	void menuIngresos(){
   		int opcion;
   		do{
+  			system("cls");
    			printf("[ Menu ingresos ]\n[ 1 - Tipo Actividad]\n[ 2 - Profesor]\n[ 3 - Localidad]\n[ 4 - Actividad]\n[ 5 - Volver]\n");
 			scanf("%d",&opcion);	
 			switch(opcion){
