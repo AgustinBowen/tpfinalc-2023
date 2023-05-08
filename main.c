@@ -357,6 +357,7 @@ int main(int argc, char *argv[])
 					ingresarActividad();
 					break;
 				case 5:
+					system("cls");
 					return;					
 				default:
 					printf("Ingrese una opcion valida ingresos \n");					

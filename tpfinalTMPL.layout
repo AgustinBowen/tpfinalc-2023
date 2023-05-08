@@ -17,9 +17,15 @@ LeftChar=1
 Order=0,7,29,8,30,16
 Focused=0
 [Editor_0]
+<<<<<<< HEAD
 CursorCol=7
 CursorRow=20
 TopLine=4
+=======
+CursorCol=12
+CursorRow=349
+TopLine=341
+>>>>>>> 6cd7c02ecfcb84aee26e9e0d6986f459a537ab85
 LeftChar=1
 [Editor_3]
 CursorCol=13
