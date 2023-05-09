@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
   
   
   // ejemplo para agregar Localidad nueva.
-  setDebug(true);
+  //setDebug(true);
   /*soc = Socio_new();
   
   
@@ -119,20 +119,30 @@ int main(int argc, char *argv[])
   /*-------------------------------ACTUALIZAR LOCALIDAD-------------------------------------*/	
   	void actualizarLocalidad(){
 		localidad = Localidad_new();
-		int codigoPostal;  		
+		int codigoPostal;  
+		char nombre[60];		
   		
   		listar(localidad);
 		printf("Ingrese el codigo postal de la localidad que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&codigoPostal);
 		if(localidad->findbykey(localidad,codigoPostal) != NOT_FOUND){
-			printf("ENTRO AL IF");
- 		}
+			printf("Ingrese el nuevo nombre de la localidad:");
+			fflush(stdin);		
+			gets(nombre);	
+	  		localidad->setNombre(localidad,nombre);
+	  		if(!localidad->saveObj(localidad)){
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}else{
+ 			printf("Codigo postal no encontrado, ingrese un codigo valido\n");
+		 }
+  		system("cls");	
 		return;
   	} 
+   /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/  	
 	void modificarDniProfesor(int codigo){
 		int legajo = codigo,dni;
-
 		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
 			printf("Ingrese el nuevo dni:");
 			fflush(stdin);		
@@ -141,25 +151,85 @@ int main(int argc, char *argv[])
 	  		if(!profesor->saveObj(profesor)){
 	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
 	  		}
- 		}			
+ 		}
+  		system("cls");		 			
+	}
+	void modificarTelefonoProfesor(int codigo){
+		int legajo = codigo;
+		char telefono[80];
+		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
+			printf("Ingrese el nuevo telefono:");
+			fflush(stdin);		
+			gets(telefono);	
+	  		profesor->setTelefono(profesor,telefono);
+	  		if(!profesor->saveObj(profesor)){
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}
+  		system("cls");		 			
+	}	
+	
+	void modificarNombresProfesor(int codigo){
+		int legajo = codigo;
+		char nombres[80];
+		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
+			printf("Ingrese el nuevo nombre:");
+			fflush(stdin);		
+			gets(nombres);	
+	  		profesor->setNombres(profesor,nombres);
+	  		if(!profesor->saveObj(profesor)){
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}
+  		system("cls");		 			
+	}	
+	
+	void modificarDomicilioProfesor(int codigo){
+		int legajo = codigo;
+		char domicilio[120];
+		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
+			printf("Ingrese el nuevo domicilio:");
+			fflush(stdin);		
+			gets(domicilio);	
+	  		profesor->setDomicilio(profesor,domicilio);
+	  		if(!profesor->saveObj(profesor)){
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}
+  		system("cls");		 			
+	}
+		
+	void modificarApellidoProfesor(int codigo){
+		int legajo = codigo;
+		char apellido[90];
+
+		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
+			printf("Ingrese el nuevo apellido:");
+			fflush(stdin);		
+			gets(apellido);	
+	  		profesor->setApellido(profesor,apellido);
+	  		if(!profesor->saveObj(profesor)){
+	  			printf("Ocurrio un error al actualizar el tipo de actividad:\n%s\n",getLastError());
+	  		}
+ 		}	
+		system("cls"); 		
 	}   
-   /*-------------------------------ACTUALIZAR PROFESOR-------------------------------------*/
+
   	void actualizarProfesor(){
 		int legajo,opcion;  		
-  		system("cls");
-		  listar(profesor);
-  		
+		system("cls");
+		listar(profesor);
 		printf("Ingrese el legajo del profesor que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&legajo);
 		if(profesor->findbykey(profesor,legajo) != NOT_FOUND){
-  			printf("[ Menu profesor ]\n[ 1 - DNI]\n[ 2 - Nombres]\n[ 3 - Apellido]\n[ 4 - Domicilio]\n[ 5 - Telefono]\n");
+  			printf("[ Menu profesor ]\n[ 1 - DNI]\n[ 2 - Nombres]\n[ 3 - Apellido]\n[ 4 - Domicilio]\n[ 5 - Telefono]\n[ 6 - Volver]\n");
   			scanf("%d",&opcion);
 			switch(opcion){
 				case 1:
 					modificarDniProfesor(legajo);
 					break;
-				/*case 2:
+				case 2:
 					modificarNombresProfesor(legajo);
 					break;
 				case 3:
@@ -170,12 +240,13 @@ int main(int argc, char *argv[])
 					break;
 				case 5:
 					modificarTelefonoProfesor(legajo);
-					break;*/
+					break;
+				case 6:
+					return;						
 				default:
 					printf("Ingrese una opcion valida");																
 			}  
- 		}
-		return;
+ 		}			
   	}	
 
   /*-------------------------------ACTUALIZAR TIPO ACTIVIDAD-------------------------------------*/
