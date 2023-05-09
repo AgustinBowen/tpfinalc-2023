@@ -14,13 +14,13 @@ CursorRow=211
 TopLine=173
 LeftChar=1
 [Editors]
-Order=7,15
-Focused=15
+Order=0,3
+Focused=0
 [Editor_0]
 <<<<<<< HEAD
-CursorCol=24
-CursorRow=344
-TopLine=341
+CursorCol=4
+CursorRow=107
+TopLine=102
 =======
 CursorCol=12
 CursorRow=349
@@ -28,9 +28,9 @@ TopLine=341
 >>>>>>> 6cd7c02ecfcb84aee26e9e0d6986f459a537ab85
 LeftChar=1
 [Editor_3]
-CursorCol=13
-CursorRow=73
-TopLine=1
+CursorCol=25
+CursorRow=31
+TopLine=46
 LeftChar=1
 [Editor_18]
 CursorCol=28

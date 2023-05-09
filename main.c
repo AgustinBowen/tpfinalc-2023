@@ -105,7 +105,6 @@ int main(int argc, char *argv[])
   destroyObjList(list,size);
   destroyObj(soc);
  */
- 
     void listar(void *obj){
 		size = ((Object *)obj)->findAll(obj,&list,NULL);
 		for(i=0;i<size;++i)
@@ -240,7 +239,7 @@ int main(int argc, char *argv[])
  		profesor = Profesor_new();  		
 		int legajo,opcion;  		
 		system("cls");
-		listar(profesor);
+		listarPorDni(profesor);
 		printf("Ingrese el legajo del profesor que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&legajo);
