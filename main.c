@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
  		profesor = Profesor_new();  		
 		int legajo,opcion;  		
 		system("cls");
-		listarPorDni(profesor);
+		listar(profesor);
 		printf("Ingrese el legajo del profesor que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&legajo);
