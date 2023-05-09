@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
 		char nombre[20];
   		int codigo;
   		
-  		listarTipoActividades(&tipoActividad);
+  		listar(tipoActividad);
 		printf("Ingrese el codigo del tipo de actividad que quiere modificar:");
 		fflush(stdin);
 		scanf("%d",&codigo);
@@ -234,8 +234,6 @@ int main(int argc, char *argv[])
     	fgets(nombre, sizeof(nombre), stdin);
    		localidad->setNombre(localidad,nombre);
     	fflush(stdin);
-		  
-		/*PARA HACER: HACER EL INGRESO DE FECHAS*/  
 		  
 		if(!localidad->saveObj(localidad)){
   			printf("Ocurrio un error al agregar Localidad:\n%s\n",getLastError());

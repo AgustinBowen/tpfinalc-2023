@@ -14,13 +14,13 @@ CursorRow=211
 TopLine=173
 LeftChar=1
 [Editors]
-Order=0,7,29,8,30,16
-Focused=0
+Order=7,15
+Focused=15
 [Editor_0]
 <<<<<<< HEAD
-CursorCol=7
-CursorRow=20
-TopLine=4
+CursorCol=24
+CursorRow=344
+TopLine=341
 =======
 CursorCol=12
 CursorRow=349
