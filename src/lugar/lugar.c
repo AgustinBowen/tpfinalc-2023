@@ -19,7 +19,7 @@ static int getCodigoLugar_Impl(void *self)
 //----------------------------------------------------
 static char *getNombreLugar_Impl(void *self)
 {
-  return  (char *) getValue(self,POS_NOMBRE_TIPOACT);
+  return  (char *) getValue(self,POS_NOMBRE_LUG);
 }
 //----------------------------------------------------
 //implementacion setters
@@ -31,7 +31,7 @@ static void setCodigoLugar_Impl(void *self,int val)
 //----------------------------------------------------
 static void setNombreLugar_Impl(void *self,char *nombre)
 { 
-	setValue(self,POS_NOMBRE_TIPOACT,nombre);
+	setValue(self,POS_NOMBRE_LUG,nombre);
 }
 //----------------------------------------------------
 //implementacion de relaciones

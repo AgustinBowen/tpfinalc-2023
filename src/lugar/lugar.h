@@ -1,8 +1,8 @@
 #ifndef LUGAR_INCLUDED
 	#define LUGAR_INCLUDED
-	#define CNT_COL_TIPOACT 2
+	#define CNT_COL_LUG 2
 	// POS 0 ES EL ID DE LA CLASE
-	#define POS_NOMBRE_TIPOACT 1	
+	#define POS_NOMBRE_LUG 1	
 
 	//----------------------------------------------------
 	typedef struct {	    
@@ -17,7 +17,7 @@
 	// funcionalidad publica que se implementa en Lugar.c
 	extern obj_Lugar *Lugar_new ();
 	// meta data para acceder a los lugares - definicion de las columnas de la tabla
-	static Column cols_Lugar[CNT_COL_TIPOACT]=
+	static Column cols_Lugar[CNT_COL_LUG]=
 	{ 
 	//definicion del mapeo, por cada columna de la tabla con los atributos del pseudobjeto.
 	// nombre de la columna, tipo, tamaño, si es clave, si es autonumerado.
@@ -25,7 +25,7 @@
 	{"nombre",t_varchar,(sizeof(char)*MAX90)+1,false,false}	
 	};
 	// plantilla para la Lugar.
-	static Table table_Lugar={"lugar",CNT_COL_TIPOACT,0, cols_Lugar,NULL};
+	static Table table_Lugar={"lugar",CNT_COL_LUG,0, cols_Lugar,NULL};
 	typedef obj_Lugar *(*getLugarObjPtr)(void *self);
 #endif
 
