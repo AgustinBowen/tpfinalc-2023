@@ -115,6 +115,20 @@ int main(int argc, char *argv[])
   		system("pause");
   		destroyObjList(list,size);	
 	} 
+	
+	
+	void listarConWhere(void *obj,char* where){
+		size = ((Object *)obj)->findAll(obj,&list,where);
+		for(i=0;i<size;++i)
+  		{
+    		itm = ((Object **)list)[i];    
+    		((Object *)itm)->toString(itm);
+  		}
+  		system("pause");
+  		destroyObjList(list,size);	
+	} 
+	
+	
 	  /*-------------------------------ACTUALIZAR SOCIO-------------------------------------*/
 	  
 	  	void modificarDniSocio(int codigo){
@@ -785,7 +799,7 @@ int main(int argc, char *argv[])
 					break;
 				case 2:
 					profesor = Profesor_new();
-					listar(profesor);
+					listarConWhere(profesor,"legajo=1 and nombres = 'Daniel'");
 					break;
 				case 3:
 					localidad = Localidad_new();
