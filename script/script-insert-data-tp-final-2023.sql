@@ -27,4 +27,6 @@ insert into localidad(cod_postal,nombre) values(9000,'Comodoro Rivadavia'),(9100
  -- insercion de datos de socios
  insert into socio(dni, nombres, apellido, domicilio, telefono, cod_postal, observaciones, activo, moroso)
  values(34785621,'Manuel','Dominguez','Maipu 1234','280456789',9100,'',true,false);
+
+ insert into lugar(nombre) values('Salon 1'),('Salon 2'),('Gimnasio grande'),('Salon 3'),('Gimnasio chico'),('Gimnasio medio'),('Salon 4');
  
