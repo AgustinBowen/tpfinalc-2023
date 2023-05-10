@@ -1,5 +1,8 @@
 create table localidad(cod_postal int primary key, 
 					   nombre varchar(60));
+
+create table lugar(codigo serial primary key, 
+					   descripcion varchar(40));					   
 					   
 create table tipo_actividad(codigo serial primary key, 
 					   nombre varchar(90));
