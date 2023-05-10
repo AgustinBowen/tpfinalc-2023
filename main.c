@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
   // ejemplo para agregar Localidad nueva.
   //setDebug(true);
   /*soc = Socio_new();
-  
+  asd
   
 
   soc->setActivo(soc,true);
